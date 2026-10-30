@@ -8,6 +8,9 @@ on:
     branches: [main]
     paths: ['app-loja/**', '.github/workflows/android.yml']
 
+permissions:
+  contents: write   # para publicar o APK de teste num link direto (Releases)
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -71,3 +74,14 @@ jobs:
         with:
           name: MeuBolso-google-play-aab
           path: app-loja/android/app/build/outputs/bundle/release/*.aab
+
+      - name: Publicar o APK de teste num link direto
+        env:
+          GH_TOKEN: ${{ github.token }}
+        working-directory: app-loja/android/app/build/outputs/apk/debug
+        run: |
+          cp app-debug.apk MeuBolso-teste.apk
+          gh release delete teste --repo "$GITHUB_REPOSITORY" --yes --cleanup-tag || true
+          gh release create teste MeuBolso-teste.apk --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --prerelease --title "Meu Bolso — versão de teste (Android)" \
+            --notes "Versão de teste para instalar direto no Android (tudo liberado, sem cobrança). Montagem nº ${{ github.run_number }}."
