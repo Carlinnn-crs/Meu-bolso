@@ -1,0 +1,44 @@
+# Codemagic — monta o Meu Bolso para iPhone num Mac na nuvem e envia para o TestFlight.
+# Antes de usar: no Codemagic, ligue a integração "App Store Connect" (Teams → Integrations)
+# com o nome "MeuBolsoASC" e configure a assinatura de código automática (veja app-loja/loja/GUIA.md).
+workflows:
+  ios-app-store:
+    name: Meu Bolso iOS (App Store)
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    working_directory: app-loja
+    integrations:
+      app_store_connect: MeuBolsoASC
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: io.github.carlinnncrs.meubolso
+      node: 22
+      xcode: latest
+      vars:
+        XCODE_PROJECT: "ios/App/App.xcodeproj"
+        XCODE_SCHEME: "App"
+        APP_STORE_APPLE_ID: 0   # trocar pelo "Apple ID" numérico do app (App Store Connect → Informações do app)
+    triggering:
+      events: []   # roda só quando você manda (botão "Start new build")
+    scripts:
+      - name: Instalar e preparar o app
+        script: |
+          npm ci
+          npm run build
+          npx cap sync ios
+      - name: Perfis de assinatura
+        script: xcode-project use-profiles
+      - name: Número da versão
+        script: |
+          LATEST=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID" || echo 0)
+          cd ios/App && agvtool new-version -all $((LATEST + 1))
+      - name: Montar o app (IPA)
+        script: xcode-project build-ipa --project "$XCODE_PROJECT" --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - app-loja/build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true

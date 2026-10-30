@@ -1,0 +1,13 @@
+{
+  "appId": "io.github.carlinnncrs.meubolso",
+  "appName": "Meu Bolso",
+  "webDir": "www",
+  "backgroundColor": "#F2F5FA",
+  "ios": { "contentInset": "never", "backgroundColor": "#F2F5FA" },
+  "android": { "backgroundColor": "#F2F5FA" },
+  "plugins": {
+    "SplashScreen": { "launchAutoHide": false, "launchShowDuration": 3000, "backgroundColor": "#F2F5FA", "showSpinner": false },
+    "LocalNotifications": { "smallIcon": "ic_stat_icon", "iconColor": "#0058C4" },
+    "SystemBars": { "insetsHandling": "css" }
+  }
+}

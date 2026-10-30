@@ -1,0 +1,10 @@
+node_modules/
+www/native.js
+android/app/build/
+android/.gradle/
+android/build/
+ios/App/build/
+ios/DerivedData/
+*.keystore
+*.jks
+keystore.properties

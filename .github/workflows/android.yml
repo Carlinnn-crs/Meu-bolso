@@ -1,0 +1,73 @@
+# Monta o Meu Bolso para Android sozinho, a cada mudança na pasta app-loja
+# (ou manualmente: aba Actions → "App Android" → Run workflow).
+name: App Android
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['app-loja/**', '.github/workflows/android.yml']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app-loja
+    env:
+      MB_VERSION_CODE: ${{ github.run_number }}
+      MB_VERSION_NAME: 1.0.${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app-loja/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Instalar e preparar o app
+        run: |
+          npm ci
+          npm run build
+          npx cap sync android
+
+      - name: Recuperar a chave de assinatura (Secrets do GitHub)
+        env:
+          KEYSTORE_BASE64: ${{ secrets.MB_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/meubolso.keystore"
+            echo "MB_KEYSTORE_FILE=$RUNNER_TEMP/meubolso.keystore" >> "$GITHUB_ENV"
+          else
+            echo "::warning::Sem chave de assinatura: vou gerar só o APK de teste. Configure os Secrets para gerar o arquivo da Google Play."
+          fi
+
+      - name: Montar APK de teste e arquivo da Google Play (AAB)
+        env:
+          MB_KEYSTORE_PASSWORD: ${{ secrets.MB_KEYSTORE_PASSWORD }}
+          MB_KEY_ALIAS: ${{ secrets.MB_KEY_ALIAS }}
+          MB_KEY_PASSWORD: ${{ secrets.MB_KEY_PASSWORD }}
+        working-directory: app-loja/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+          if [ -n "$MB_KEYSTORE_FILE" ]; then ./gradlew bundleRelease; fi
+
+      - name: Guardar o APK de teste
+        uses: actions/upload-artifact@v4
+        with:
+          name: MeuBolso-teste-apk
+          path: app-loja/android/app/build/outputs/apk/debug/*.apk
+
+      - name: Guardar o arquivo para a Google Play (AAB)
+        if: env.MB_KEYSTORE_FILE != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: MeuBolso-google-play-aab
+          path: app-loja/android/app/build/outputs/bundle/release/*.aab
