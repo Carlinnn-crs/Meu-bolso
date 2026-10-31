@@ -14,9 +14,9 @@ window.MB_CONFIG = {
   ENTITLEMENT: "pro",
 
   // Usados só se a loja não responder (o preço real vem sempre da loja)
-  TRIAL_DIAS: 7,
-  PRECO_MENSAL: "R$ 14,90",
-  PRECO_ANUAL: "R$ 119,90",
+  TRIAL_DIAS: 14,
+  PRECO_MENSAL: "R$ 10,99",
+  PRECO_ANUAL: "R$ 59,90",
 
   // Páginas legais (já publicadas no GitHub Pages)
   TERMOS_URL: "https://carlinnn-crs.github.io/Meu-bolso/app-loja/legal/termos.html",

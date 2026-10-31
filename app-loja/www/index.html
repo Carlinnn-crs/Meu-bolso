@@ -1213,7 +1213,7 @@ function trialText(pkg){
 function drawPlans(){
   const box=$("pw-plans"); const a=plans&&plans.annual, m=plans&&plans.monthly;
   const aPrice=a?a.product.priceString:CFG.PRECO_ANUAL, mPrice=m?m.product.priceString:CFG.PRECO_MENSAL;
-  let save=""; if(a&&m&&a.product.price&&m.product.price){ const pc=Math.round((1-a.product.price/(m.product.price*12))*100); if(pc>0) save=`Economize ${pc}%`; } else save="Economize 33%";
+  let save=""; if(a&&m&&a.product.price&&m.product.price){ const pc=Math.round((1-a.product.price/(m.product.price*12))*100); if(pc>0) save=`Economize ${pc}%`; } else { const pm=v=>parseFloat(String(v||"").replace(/[^\d,]/g,"").replace(",",".")); const am=pm(CFG.PRECO_ANUAL), mm=pm(CFG.PRECO_MENSAL); if(am&&mm){ const pc=Math.round((1-am/(mm*12))*100); if(pc>0) save=`Economize ${pc}%`; } }
   box.innerHTML=`<button class="plan ${selPlan==="annual"?"on":""}" data-p="annual">${save?`<span class="badge">${save}</span>`:""}<span class="r"></span><span class="n"><b>Anual</b><small>${a?perMonth(a):"Pagamento único por ano"}</small></span><span class="v num">${aPrice}<small>por ano</small></span></button>
     <button class="plan ${selPlan==="monthly"?"on":""}" data-p="monthly"><span class="r"></span><span class="n"><b>Mensal</b><small>Cancele quando quiser</small></span><span class="v num">${mPrice}<small>por mês</small></span></button>`;
   box.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{ selPlan=b.dataset.p; drawPlans(); });

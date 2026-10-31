@@ -5,7 +5,7 @@
 
 ## Fase 1 — App pronto ✅
 - 🤖 App para iPhone e Android (pasta `app-loja`), com seu logo, ícones e tela de abertura
-- 🤖 Tela de assinatura: 7 dias grátis → R$ 14,90/mês ou R$ 119,90/ano, "Restaurar compras"
+- 🤖 Tela de assinatura: 14 dias grátis → R$ 10,99/mês ou R$ 59,90/ano, "Restaurar compras"
 - 🤖 Bloqueio com Face ID/digital, lembrete diário, dados guardados no celular + backup
 - 🤖 Política de privacidade e termos (publicados no seu GitHub Pages)
 - 🤖 Textos da loja: `loja/textos-da-loja.md`

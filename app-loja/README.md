@@ -1,6 +1,6 @@
 # Meu Bolso — versão para App Store e Google Play
 
-App de controle de gastos com assinatura (7 dias grátis → R$ 14,90/mês ou R$ 119,90/ano).
+App de controle de gastos com assinatura (14 dias grátis → R$ 10,99/mês ou R$ 59,90/ano).
 
 - `www/` — o app (HTML/JS). `www/config.js` liga/desliga a cobrança e guarda as chaves públicas da RevenueCat.
 - `src/native.js` — ponte com o celular: assinatura (RevenueCat), Face ID, lembrete, armazenamento e compartilhar.

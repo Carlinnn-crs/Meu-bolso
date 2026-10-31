@@ -61,7 +61,7 @@ SEUS DADOS SÃO SEUS
 • Cópia de segurança e exportação para planilha.
 
 MEU BOLSO PRO
-Experimente grátis por 7 dias. Depois, R$ 14,90 por mês ou R$ 119,90 por ano (economize 33%). A assinatura renova automaticamente, a menos que seja cancelada pelo menos 24 horas antes do fim do período. Cancele quando quiser nos ajustes de assinaturas da sua conta da loja.
+Experimente grátis por 14 dias. Depois, R$ 10,99 por mês ou R$ 59,90 por ano (economize 55%). A assinatura renova automaticamente, a menos que seja cancelada pelo menos 24 horas antes do fim do período. Cancele quando quiser nos ajustes de assinaturas da sua conta da loja.
 
 Termos de uso: https://carlinnn-crs.github.io/Meu-bolso/app-loja/legal/termos.html
 Política de privacidade: https://carlinnn-crs.github.io/Meu-bolso/app-loja/legal/privacidade.html
@@ -76,15 +76,15 @@ Primeira versão do Meu Bolso! 🎉
 
 ### Apple (App Store Connect → seu app → Assinaturas)
 - Grupo de assinaturas: **Meu Bolso Pro**
-- Assinatura 1 — ID do produto: `meubolso_pro_mensal` — duração: 1 mês — preço: **R$ 14,90**
-- Assinatura 2 — ID do produto: `meubolso_pro_anual` — duração: 1 ano — preço: **R$ 119,90**
-- Em cada uma: **Oferta introdutória → Gratuita → 1 semana** (7 dias), para novos assinantes.
+- Assinatura 1 — ID do produto: `meubolso_pro_mensal` — duração: 1 mês — preço: **R$ 10,99** (se a Apple não tiver esse valor exato, use o mais próximo: R$ 10,90)
+- Assinatura 2 — ID do produto: `meubolso_pro_anual` — duração: 1 ano — preço: **R$ 59,90**
+- Em cada uma: **Oferta introdutória → Gratuita → 2 semanas** (14 dias), para novos assinantes.
 
 ### Google (Play Console → Monetizar → Assinaturas)
 - ID da assinatura: `meubolso_pro`
-- Plano base 1: ID `mensal` — renovação automática mensal — **R$ 14,90**
-- Plano base 2: ID `anual` — renovação automática anual — **R$ 119,90**
-- Em cada plano: **Oferta → Teste sem custo financeiro → 7 dias**, qualificação “Novos clientes”.
+- Plano base 1: ID `mensal` — renovação automática mensal — **R$ 10,99**
+- Plano base 2: ID `anual` — renovação automática anual — **R$ 59,90**
+- Em cada plano: **Oferta → Teste sem custo financeiro → 14 dias**, qualificação “Novos clientes”.
 
 ### RevenueCat (o painel que liga as lojas ao app)
 - Entitlement: `pro`
@@ -123,4 +123,4 @@ Peça ao Claude para gerar os prints com dados de exemplo.
 
 ## 9. Observação para o revisor da Apple (App Review Information → Notes)
 
-O Meu Bolso não tem login: todos os dados ficam no aparelho. A assinatura (Meu Bolso Pro, mensal ou anual, com 7 dias grátis) é oferecida na tela de assinatura que aparece na primeira abertura. Use uma conta Sandbox para testar a compra. “Restaurar compras” fica na tela de assinatura e em Ajustes → Assinatura.
+O Meu Bolso não tem login: todos os dados ficam no aparelho. A assinatura (Meu Bolso Pro, mensal ou anual, com 14 dias grátis) é oferecida na tela de assinatura que aparece na primeira abertura. Use uma conta Sandbox para testar a compra. “Restaurar compras” fica na tela de assinatura e em Ajustes → Assinatura.
