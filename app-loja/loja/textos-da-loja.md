@@ -17,9 +17,9 @@ Tudo pronto para copiar e colar na App Store Connect (Apple) e na Google Play Co
 | Política de privacidade | https://carlinnn-crs.github.io/Meu-bolso/app-loja/legal/privacidade.html |
 | Termos de uso | https://carlinnn-crs.github.io/Meu-bolso/app-loja/legal/termos.html |
 | Site de suporte (Apple pede) | https://carlinnn-crs.github.io/Meu-bolso/app-loja/legal/privacidade.html (troque depois por um site seu, se quiser) |
-| E-mail de contato | o seu e-mail de suporte |
+| E-mail de contato | carlinhosgavioes84@gmail.com |
 
-> ⚠️ Antes de enviar: abra `legal/privacidade.html` e `legal/termos.html` e troque **[SEU NOME COMPLETO]** e **[SEU E-MAIL DE CONTATO]** pelos seus dados (ou peça ao Claude).
+> ✅ Nome e e-mail já preenchidos na política de privacidade e nos termos de uso.
 
 ---
 

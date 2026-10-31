@@ -22,7 +22,7 @@ Enquanto `MODO_TESTE: true` (em `www/config.js`), o app fica todo liberado, sem 
    (repositório → Settings → Secrets and variables → Actions):
    `MB_KEYSTORE_BASE64`, `MB_KEYSTORE_PASSWORD`, `MB_KEY_ALIAS`, `MB_KEY_PASSWORD`.
    ⚠️ Guarde essa chave e as senhas em lugar seguro — sem elas não dá para atualizar o app.
-6. Trocar **[SEU NOME COMPLETO]** e **[SEU E-MAIL DE CONTATO]** nas páginas legais (🤖 o Claude faz se você mandar).
+6. ✅ Nome e e-mail já estão nas páginas legais.
 
 ## Fase 3 — Testes
 ### Google (obrigatório para conta pessoal nova)
