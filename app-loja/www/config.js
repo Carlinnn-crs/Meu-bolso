@@ -27,5 +27,5 @@ window.MB_CONFIG = {
   LINK_GOOGLE_PLAY: "",
 
   // E-mail de suporte (aparece em Ajustes)
-  EMAIL_SUPORTE: "carlinhosgavioes84@gmail.com"
+  EMAIL_SUPORTE: "carloslobato138@gmail.com"
 };
