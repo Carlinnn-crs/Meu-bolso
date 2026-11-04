@@ -96,3 +96,15 @@ jobs:
           gh release create teste MeuBolso-teste.apk --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
             --prerelease --title "Meu Bolso — versão de teste (Android)" \
             --notes "Versão de teste para instalar direto no Android (tudo liberado, sem cobrança). Montagem nº ${{ github.run_number }}."
+
+      - name: Publicar o arquivo da Google Play (AAB) num link direto
+        if: env.MB_KEYSTORE_FILE != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        working-directory: app-loja/android/app/build/outputs/bundle/release
+        run: |
+          cp app-release.aab MeuBolso-google-play.aab
+          gh release delete google-play --repo "$GITHUB_REPOSITORY" --yes --cleanup-tag || true
+          gh release create google-play MeuBolso-google-play.aab --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --prerelease --title "Meu Bolso — arquivo para a Google Play (AAB)" \
+            --notes "Arquivo .aab assinado para enviar ao Google Play Console. Versão 1.0.${{ github.run_number }} (código ${{ github.run_number }})."
