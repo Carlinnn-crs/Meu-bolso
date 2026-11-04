@@ -10,4 +10,4 @@ App de controle de gastos com assinatura (14 dias grátis → R$ 10,99/mês ou R
 
 A versão de site que já está em uso (`../MeuBolso-app/`) não é alterada por esta pasta.
 
-Chave de assinatura configurada em 04/11/2026: o GitHub gera o arquivo .aab assinado para a Google Play.
+Chave de assinatura configurada em 04/11/2026 (corrigida): o GitHub gera o arquivo .aab assinado para a Google Play.
