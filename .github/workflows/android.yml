@@ -43,9 +43,20 @@ jobs:
       - name: Recuperar a chave de assinatura (Secrets do GitHub)
         env:
           KEYSTORE_BASE64: ${{ secrets.MB_KEYSTORE_BASE64 }}
+          MB_KEYSTORE_PASSWORD: ${{ secrets.MB_KEYSTORE_PASSWORD }}
         run: |
           if [ -n "$KEYSTORE_BASE64" ]; then
-            echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/meubolso.keystore"
+            # remove espaços, quebras de linha e um eventual "Valor:" colado junto
+            CLEAN=$(printf '%s' "$KEYSTORE_BASE64" | sed 's/^[[:space:]]*Valor:[[:space:]]*//' | tr -d ' \r\n\t')
+            echo "Tamanho do segredo MB_KEYSTORE_BASE64: ${#CLEAN} caracteres (o certo é 3580)"
+            if ! printf '%s' "$CLEAN" | base64 -d > "$RUNNER_TEMP/meubolso.keystore" 2>/dev/null; then
+              echo "::error title=Chave inválida::O segredo MB_KEYSTORE_BASE64 tem ${#CLEAN} caracteres e não é um texto base64 válido (o certo são 3580). Cole de novo todo o conteúdo do arquivo MB_KEYSTORE_BASE64.txt."
+              exit 1
+            fi
+            if ! keytool -list -keystore "$RUNNER_TEMP/meubolso.keystore" -storepass "$MB_KEYSTORE_PASSWORD" >/dev/null 2>&1; then
+              echo "::error title=Senha ou chave incorreta::A chave foi lida (${#CLEAN} caracteres), mas a senha MB_KEYSTORE_PASSWORD não abre a chave. Confira se a senha foi colada sem espaços e sem a palavra Valor."
+              exit 1
+            fi
             echo "MB_KEYSTORE_FILE=$RUNNER_TEMP/meubolso.keystore" >> "$GITHUB_ENV"
           else
             echo "::warning::Sem chave de assinatura: vou gerar só o APK de teste. Configure os Secrets para gerar o arquivo da Google Play."
